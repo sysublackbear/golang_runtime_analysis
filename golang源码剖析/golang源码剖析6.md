@@ -1247,7 +1247,7 @@ func chanrecv(c *hchan, ep unsafe.Pointer, block bool) (selected, received bool)
 
 示意图如下：
 
-![image-20191116190244597](/Users/dengzhuowen/Library/Application Support/typora-user-images/image-20191116190244597.png)
+![image-20191116190244597](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20191116190244597.png)
 
 **注意：**`chansend`和`chanrecv`都需要对管道进行加锁。
 
