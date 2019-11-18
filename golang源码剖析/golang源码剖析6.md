@@ -470,7 +470,7 @@ func releaseSudog(s *sudog) {
 
 **chan.go**
 
-**注：**由于同步收发和异步收发的代码都写在一起了，所以对于异步收发的算法，依然从下面这段逻辑开始分析。
+**注**：由于同步收发和异步收发的代码都写在一起了，所以对于异步收发的算法，依然从下面这段逻辑开始分析。
 
 ```go
 // entry point for c <- x from compiled code
