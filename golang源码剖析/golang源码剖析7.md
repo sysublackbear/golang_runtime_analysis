@@ -619,4 +619,4 @@ fault
 
 **程序首先运行panic，出现故障，此时跳转到包含recover()的defer函数执行，recover捕获panic，此时panic就不继续传递。但是recover之后，程序并不会返回到panic那个点继续执行以后的动作，而是在recover这个点继续执行以后的动作，即执行上面的defer函数，输出1。**
 
-**注意：**利用`recover`处理`panic`指令，必须利用`defer`在`panic`之前声明，否则当`panic`时，`recover`无法捕获到`panic`，无法防止`panic`扩散．
+**注意**：利用`recover`处理`panic`指令，必须利用`defer`在`panic`之前声明，否则当`panic`时，`recover`无法捕获到`panic`，无法防止`panic`扩散．
