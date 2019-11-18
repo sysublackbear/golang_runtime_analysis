@@ -1229,7 +1229,7 @@ func forcegchelper() {
 
 GC的整个过程如下：
 
-![image-20191112120510474](/Users/dengzhuowen/Library/Application Support/typora-user-images/image-20191112120510474.png)
+![image-20191112120510474](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20191112120510474.png)
 
 
 
