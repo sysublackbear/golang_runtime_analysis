@@ -345,7 +345,7 @@ func Goexit() {
 }
 ```
 
-**比较有趣的是：**在`main goroutine`里执行`Goexit`，它会等待其他`goroutine`结束后才会崩溃。
+**比较有趣的是**：在`main goroutine`里执行`Goexit`，它会等待其他`goroutine`结束后才会崩溃。
 
 
 
