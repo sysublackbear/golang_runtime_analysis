@@ -621,7 +621,7 @@ golang里面，分配器将其管理的内存块分为两种。
 
 ![skiplist](https://cyningsun.github.io/public/blog-img/allocator/ptmalloc-logical.png)
 
-**注意：**Main arena 无需维护多个堆，因此也无需 heap_info。当空间耗尽时，与 thread arena 不同，main arena 可以通过 sbrk 拓展堆段，直至堆段「碰」到内存映射段。
+**注意**：Main arena 无需维护多个堆，因此也无需 heap_info。当空间耗尽时，与 thread arena 不同，main arena 可以通过 sbrk 拓展堆段，直至堆段「碰」到内存映射段。
 
 + 用户调用`malloc()`分配内存空间时，该线程先看线程私有变量中是否已经存在一个分配区，如果存在，则尝试对该分配区加锁，如果加锁成功，使用该分配区分配内存，如果失败，该线程搜索循环链表试图获得一个没有加锁的分配区。如果所有的分配区都已经加锁，那么`malloc()`会开辟一个新的分配区，把该分配区加入到全局分配区循环链表并加锁，然后使用该分配区进行分配内存操作。
 + 在释放操作中，线程同样试图获得待释放内存块所在分配区的锁，如果该分配区正在被别的线程使用，则需要等待直到其他线程释放该分配区的互斥锁之后才进行释放操作（自旋操作）；
@@ -656,7 +656,7 @@ golang里面，分配器将其管理的内存块分为两种。
 ![skiplist](https://cyningsun.github.io/public/blog-img/allocator/tcmalloc-simple.png)
 
 + tcmalloc把8kb的连续内存称为一个页，一个或多个连续的页组成一个Span。tcmalloc中所有页级别的操作，都是对Span的操作。PageHeap是一个全局的管理Span的类，PageHeap把小的Span保存到双向循环链表中，而大的Span则保存在了Set中，保证内存分配的速度，减少内存查找。
-+ **分配过程（大致看看即可）：**每个线程都一个线程局部的 ThreadCache，ThreadCache中包含一个链表数组FreeList list_[kNumClasses]，维护了不同规格的空闲内存的链表；当申请内存的时候可以直接根据大小寻找恰当的规则的内存。如果ThreadCache的对象不够了，就从 CentralCache 进行批量分配；如果 CentralCache 依然没有，就从PageHeap申请Span；PageHeap首先在free[n,128]中查找、然后到large set中查找，目标就是找到一个最小的满足要求的空闲Span，优先使用normal类链表中的Span。如果找到了一个Span，则尝试分裂(Carve)这个Span并分配出去；如果所有的链表中都没找到length>=n的Span，则只能从操作系统申请了。Tcmalloc一次最少向系统申请1MB的内存，默认情况下，使用sbrk申请，在sbrk失败的时候，使用mmap申请。当我们申请的内存大于kMaxSize(256k)的时候，内存大小超过了ThreadCache和CenterCache的最大规格，所以会直接从全局的PageHeap中申请最小的Span分配出去(return span->start « kPageShift))；
++ **分配过程（大致看看即可）**：每个线程都一个线程局部的 ThreadCache，ThreadCache中包含一个链表数组FreeList list_[kNumClasses]，维护了不同规格的空闲内存的链表；当申请内存的时候可以直接根据大小寻找恰当的规则的内存。如果ThreadCache的对象不够了，就从 CentralCache 进行批量分配；如果 CentralCache 依然没有，就从PageHeap申请Span；PageHeap首先在free[n,128]中查找、然后到large set中查找，目标就是找到一个最小的满足要求的空闲Span，优先使用normal类链表中的Span。如果找到了一个Span，则尝试分裂(Carve)这个Span并分配出去；如果所有的链表中都没找到length>=n的Span，则只能从操作系统申请了。Tcmalloc一次最少向系统申请1MB的内存，默认情况下，使用sbrk申请，在sbrk失败的时候，使用mmap申请。当我们申请的内存大于kMaxSize(256k)的时候，内存大小超过了ThreadCache和CenterCache的最大规格，所以会直接从全局的PageHeap中申请最小的Span分配出去(return span->start « kPageShift))；
 + tcmalloc的优势：
   + 小内存可以在ThreadCache中不加锁分配（加锁的代价大约100ms）；
   + 大内存可以直接按照大小分配而不需要再像ptmalloc一样进行查找；
@@ -764,7 +764,7 @@ TEXT main.main(SB) /home/sysublackbear/go/src/zhuowen.deng/test.go
 
 显然内联优化的代码没有调用`newobject`在堆上分配内存。
 
-**原因：**没有内联的时候，需要在两个栈帧之间（main函数栈帧，test函数栈帧）传递对象，因此会在堆上分配而不是返回一个失败栈帧的数据。而当内联后，它实际上就成了main栈帧内的局部变量，无须去堆上操作。
+**原因**：没有内联的时候，需要在两个栈帧之间（main函数栈帧，test函数栈帧）传递对象，因此会在堆上分配而不是返回一个失败栈帧的数据。而当内联后，它实际上就成了main栈帧内的局部变量，无须去堆上操作。
 
 
 

@@ -705,7 +705,7 @@ type struct {
 
 如此一来，关于”go语言会复制参数值“的规则就很好理解了。站在`newproc`的角度，我们可以画出执行栈的状态示意图：
 
-![image-20191105164831001](/Users/dengzhuowen/Library/Application Support/typora-user-images/image-20191105164831001.png)
+![image-20191105164831001](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20191105164831001.png)
 
 最开始进入到了函数`add`的地址，`add(unsafe,Pointer(&fn), ptrSize)`跳过了size这个参数，获得了第一个参数x的地址，`getcallerpc`用size - 8 读取 CALL指令压入的 main PC/IP寄存器值，这就是 `newproc`为`newproc1`准备的相关参数值。如下：
 
