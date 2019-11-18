@@ -404,7 +404,7 @@ type g struct {
 
 
 
-**流程：**编译器将`panic`翻译成`gopanic`函数调用。它会将错误信息打包成`_panic`对象，并挂到`G._panic`链表的头部，然后遍历执行`G._defer`链表，检查是否`recover`。如被`recover`，则终止遍历执行，跳转到正常的`deferreturn`环节。否则执行整个调用堆栈的延迟函数后，显示异常信息，终止进程。
+**流程**：编译器将`panic`翻译成`gopanic`函数调用。它会将错误信息打包成`_panic`对象，并挂到`G._panic`链表的头部，然后遍历执行`G._defer`链表，检查是否`recover`。如被`recover`，则终止遍历执行，跳转到正常的`deferreturn`环节。否则执行整个调用堆栈的延迟函数后，显示异常信息，终止进程。
 
 **panic.go**
 
@@ -584,9 +584,9 @@ func gorecover(argp uintptr) interface{} {
 
 
 
-**附录：**panic/recover的用法
+**附录**：panic/recover的用法
 
-**例子：**
+**例子**：
 
 ```go
 package main
