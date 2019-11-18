@@ -2,7 +2,7 @@
 
 golang的并发调度基本示意图如下：（GMP模型）
 
-![image-20191105120158914](/Users/dengzhuowen/Library/Application Support/typora-user-images/image-20191105120158914.png)
+![image-20191105120158914](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20191105120158914.png)
 
 其中：
 
