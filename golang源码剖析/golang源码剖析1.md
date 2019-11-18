@@ -541,7 +541,7 @@ func main() {
 + 所有init函数都在同一个goroutine内执行；
 + 所有init函数结束后才会执行main.main函数。
 
-![image-20191111161411307](/Users/dengzhuowen/Library/Application Support/typora-user-images/image-20191111161411307.png)
+![image-20191111161411307](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20191111161411307.png)
 
 
 
