@@ -625,7 +625,7 @@ func sysMap(v unsafe.Pointer, n uintptr, sysStat *uint64) {
 
 对象分配的整个过程如下：
 
-![image-20191111173141574](/Users/dengzhuowen/Library/Application Support/typora-user-images/image-20191111173141574.png)
+![image-20191111173141574](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20191111173141574.png)
 
 
 
