@@ -76,7 +76,7 @@ type bmap struct {
 
 ## 14.2.bmap的内部组成
 
-![57577391-f88f1d80-74a7-11e9-893c-4783dc4fb35e](/Users/dengzhuowen/Desktop/golang源码剖析/img/57577391-f88f1d80-74a7-11e9-893c-4783dc4fb35e.png)
+![image-20200106110832576.png](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20200106110832576.png)
 
 上图就是 bucket 的内存模型，`HOB Hash` 指的就是 top hash。 注意到 key 和 value 是各自放在一起的，并不是 `key/value/key/value/...` 这样的形式。源码里说明这样的好处是在某些情况下可以省略掉 padding 字段，节省内存空间。
 
