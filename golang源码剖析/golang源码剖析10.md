@@ -274,7 +274,7 @@ func growslice(et *_type, old slice, cap int) slice {
 
 ## 13.5.切片切割
 
-![WechatIMG341](/Users/dengzhuowen/Desktop/golang源码剖析/img/WechatIMG341.png)
+![image-20200106110530876.png](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20200106110530876.png)
 
 `s1[:]`：同样的共享底层数组，同样是浅拷贝。
 
