@@ -580,7 +580,7 @@ golang里面，分配器将其管理的内存块分为两种。
 
 ![img](https://pic4.zhimg.com/80/v2-05a8740554bedf4dc0a6912c6e8551db_hd.png)
 
-![skiplist](https://cyningsun.github.io/public/blog-img/allocator/tcmalloc.png)
+![skiplist](https://www.cyningsun.com/images/allocator/tcmalloc.png)
 
 由上图可知，所有的cache都采用了**freeList**的数据结构。
 
