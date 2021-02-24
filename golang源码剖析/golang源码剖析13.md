@@ -95,7 +95,7 @@ state1是个长度为3的数组，其中包含了state和一个信号量，而st
 
 考虑到字节是否对齐，三者出现的位置不同，为简单起见，依照字节已对齐情况下，三者在内存中的位置如下所示：
 
-![3d44fe27957013aa82eca2923cafe50d909](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/image-20200106110530876.png)
+![3d44fe27957013aa82eca2923cafe50d909](https://github.com/sysublackbear/golang_runtime_analysis/blob/master/img/3d44fe27957013aa82eca2923cafe50d909.jpg)
 
 WaitGroup对外提供三个接口：
 
